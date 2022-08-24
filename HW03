@@ -1,0 +1,107 @@
+# 1. Реализовать функцию, принимающую два числа (позиционные аргументы) и выполняющую их деление.
+# Числа запрашивать у пользователя, предусмотреть обработку ситуации деления на ноль.
+def calculator(a, b):
+    try:
+        return a/b
+    except ZeroDivisionError as e:
+        print(f"Error! You can't divide by zero")
+print(calculator(int(input("First number: ")), int(input("Second number: "))))
+
+# 2. Реализовать функцию, принимающую несколько параметров, описывающих данные пользователя: имя, фамилия, год рождения, город проживания, email, телефон.
+# Функция должна принимать параметры как именованные аргументы. Реализовать вывод данных о пользователе одной строкой.
+def personal_data(name, lastname, year_of_birth, city, email, phone):
+    return print(f"Имя: {name} Surname: {lastname} Birth year: {year_of_birth}"
+                 f"City: {city} Email: {email} Phone number: {phone}")
+
+
+personal_data(
+    name=input("Name: "),
+    lastname=input("Surname: "),
+    year_of_birth=input("Birth year: "),
+    city=input("City: "),
+    email=input("email: "),
+    phone=input("phone: "),
+)
+
+# 3. Реализовать функцию my_func(), которая принимает три позиционных аргумента, и возвращает сумму наибольших двух аргументов.
+def my_func(arg1, arg2, arg3):
+    print(f"The sum of the two largest arguments is: {arg1 + arg2 + arg3 - min([arg1, arg2, arg3])}")
+
+my_func(
+    int(input("Arg1: ")),
+    int(input("Arg2: ")),
+    int(input("Arg3: ")),
+)
+
+# 4. Программа принимает действительное положительное число x и целое отрицательное число y.
+# Необходимо выполнить возведение числа x в степень y. Задание необходимо реализовать в виде функции my_func(x, y).
+# При решении задания необходимо обойтись без встроенной функции возведения числа в степень.
+
+def my_func(x, y):
+    return x ** y
+
+def my_func_2(x, y):
+    counter = 1
+    result = 1 / x
+
+while counter < abs(y):
+    result = result * (1 / x)
+    counter += 1
+return result
+
+print(f"Exponentiation option 1: "
+      f"{my_func(int(input("Degree base Х: ")), int(input("Exponent Y: ")))}")
+
+print(f"Exponentiation option 2: "
+      f"{my_func_2(int(input("Degree base Х: ")), int(input("Exponent Y: ")))}")
+
+# 5. Программа запрашивает у пользователя строку чисел, разделенных пробелом.
+# При нажатии Enter должна выводиться сумма чисел. Пользователь может продолжить ввод чисел, разделенных пробелом и снова нажать Enter.
+# Сумма вновь введенных чисел будет добавляться к уже подсчитанной сумме.
+# Но если вместо числа вводится специальный символ, выполнение программы завершается. Если специальный символ введен после нескольких чисел, то вначале нужно добавить сумму этих чисел к полученной ранее сумме и после этого завершить программу.
+
+def calculate_sum(*nums):
+    sum = 0
+    flag = False
+    for num in nums:
+        try:
+            if num:
+                sum += float(num)
+        except ValueError:
+            flag = True
+    return sum, flag
+
+general_sum = 0
+
+while True:
+    numbers_string = input("Enter numbers separated by spaces: ").split(" ")
+    sum, stop_flag = calculate_sum(*numbers_string)
+    general_sum += sum
+    print(f"sum {general_sum}")
+
+    if stop_flag:
+        break
+
+# 6. Реализовать функцию int_func(), принимающую слово из маленьких латинских букв и возвращающую его же, но с прописной первой буквой.
+# Например, print(int_func(‘text’)) -> Text.
+# Продолжить работу над заданием. В программу должна попадать строка из слов, разделенных пробелом.
+# Каждое слово состоит из латинских букв в нижнем регистре. Сделать вывод исходной строки, но каждое слово должно начинаться с заглавной буквы.
+# Необходимо использовать написанную ранее функцию int_func().
+
+
+def int_func(text):
+    return text.title()
+
+def my_title(text):
+    listed_text = list(text)
+    listed_text[0] = listed_text[0].upper()
+    return "".join(listed_text)
+
+output_1 = []
+output_2 = []
+for word in input("Enter a string with words separated by spaces: ").split(" "):
+    output_1.append(int_func(word))
+    output_2.append(my_title(word))
+
+print(f' Example 1: {" ".join(output_1)}')
+print(f'Example 2: {" ".join(output_2)}')
